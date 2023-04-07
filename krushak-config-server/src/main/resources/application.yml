@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: krushak-config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      profile: git
+      server:
+        git:
+          uri: https://github.com/bgandluru/krushak.git
+          default-label: master
+          clone-submodules: true
+          search-paths: krushak-config
+          clone-on-start: true

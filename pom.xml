@@ -6,4 +6,8 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>krushak</name>
+  <modules>
+    <module>krushak-config-server</module>
+    <module>krushak-service</module>
+  </modules>
 </project>
