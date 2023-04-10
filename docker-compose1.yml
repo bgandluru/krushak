@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  krushak-service:
+    image: krushak/krushak-service
+    mem_reservation: 700m
+    ports:
+      - "9001:9001"
+    depends_on:
+      - krushak-config-server
+      - krushak-eureka-service
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_CONFIG_IMPORT: optional:configserver:http://krushak-config-server:8001
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://krushak-eureka-service:8761/eureka/
+    networks:
+      - krushak-network
+
+  krushak-eureka-service:
+    image: krushak/krushak-eureka-service
+    mem_reservation: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - krushak-network
+
+  krushak-config-server:
+    image: krushak/krushak-config-server
+    mem_reservation: 700m
+    ports:
+      - "8001:8001"
+    depends_on:
+      - krushak-eureka-service
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://krushak-eureka-service:8761/eureka/
+    networks:
+      - krushak-network
+
+networks:
+  krushak-network:

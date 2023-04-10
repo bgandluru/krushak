@@ -9,5 +9,6 @@
   <modules>
     <module>krushak-config-server</module>
     <module>krushak-service</module>
+    <module>krushak-eureka-service</module>
   </modules>
 </project>

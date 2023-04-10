@@ -1,0 +1,21 @@
+#App information such as app name and port information
+server:
+  port: 8761
+spring:
+  application:
+    name: krushak-eureka-service
+
+#Adding eureka discovery and registry information for clients to connect
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/
+    fetch-registry: false # COMMENT1: false because eureka is a single registry instance for now. this will change if we spin off multiple eureka instance across geographic locations
+    register-with-eureka: false #Same as comment 1
+
+
+
+
+

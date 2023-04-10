@@ -1,0 +1,13 @@
+#crete a docker image from build pack
+mvn spring-boot:build-image
+
+#Docker commands
+#list out images in docker
+docker images
+#run image in docker
+docker run -p 9001:9001 krushak-service
+#list out containers in docker
+docker ps
+
+Thank You
+Thankclear

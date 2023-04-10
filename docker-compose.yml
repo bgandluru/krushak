@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  krushak-config-server:
+    image: krushak/krushak-config-server
+    mem_reservation: 700m
+    ports:
+      - "8001:8001"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://krushak-eureka-service:8761/eureka/
+    networks:
+      - krushak-network
+
+networks:
+  krushak-network:

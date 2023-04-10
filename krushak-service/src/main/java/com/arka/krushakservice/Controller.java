@@ -1,14 +1,24 @@
 package com.arka.krushakservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RefreshScope
 public class Controller {
+
+  final KrushakConfig krushakConfig;
+
+    public Controller(KrushakConfig krushakConfig) {
+        this.krushakConfig = krushakConfig;
+    }
 
     @GetMapping(value = "/message")
     public String getMessage(){
-        return "bharath gandluru";
+        return krushakConfig.getEnvironment();
     }
 
 }

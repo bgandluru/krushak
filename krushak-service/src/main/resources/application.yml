@@ -1,6 +1,28 @@
 spring:
+  config:
+    import: optional:configserver:http://localhost:8001
   cloud:
     config:
-      enabled: false
+      enabled: true
+      allow-override: true
+      override-none: true
+      override-system-properties: false
   profiles:
       active: dev
+  application:
+    name: krushak-service
+server:
+  port: 9001
+app:
+  environment: local
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#Adding eureka registry service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8002/eureka/
